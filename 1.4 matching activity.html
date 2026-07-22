@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matching Exercise: Aspects of Leadership Identity</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6f1;
+      margin: 0;
+      padding: 20px;
+      color: #2f3a2f;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 14px rgba(47, 58, 47, 0.08);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      text-align: center;
+      color: #2f3a2f;
+    }
+
+    .instructions {
+      background: #eef2e8;
+      border-left: 5px solid #7a8b6f;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .scenario {
+      border: 1px solid #d8dfd2;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      background: #fbfcf8;
+    }
+
+    .scenario p {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-weight: 600;
+      color: #2f3a2f;
+      line-height: 1.5;
+    }
+
+    select {
+      width: 100%;
+      max-width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #c6d0bf;
+      font-size: 1rem;
+      background: #ffffff;
+      color: #2f3a2f;
+      line-height: 1.4;
+    }
+
+    .buttons {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: #6f8064;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5d6d53;
+    }
+
+    button.secondary {
+      background: #8b9487;
+    }
+
+    button.secondary:hover {
+      background: #757d71;
+    }
+
+    .feedback {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      display: none;
+    }
+
+    .correct {
+      background: #ecf3e7;
+      border: 1px solid #b9c8b0;
+      color: #35523a;
+    }
+
+    .incorrect {
+      background: #f8ece7;
+      border: 1px solid #d7b1a3;
+      color: #7a3f34;
+    }
+
+    .result-list {
+      margin-top: 12px;
+      font-weight: normal;
+      padding-left: 20px;
+    }
+
+    .result-list li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      select,
+      button {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Matching Exercise: Aspects of Leadership Identity</h1>
+
+    <div class="instructions">
+      <strong>Instructions:</strong> Match each aspect of leadership identity to the best example.
+    </div>
+
+    <div class="scenario">
+      <p>1. Personal qualities</p>
+      <select id="item1">
+        <option value="">Select an example</option>
+        <option value="context">In a public sector organisation, leadership behaviour emphasises accountability, transparency, and service to the community.</option>
+        <option value="relationships">A professional becomes recognised as a leader because colleagues regularly seek their advice and value their perspective.</option>
+        <option value="qualities">A team member’s confidence, resilience and willingness to take initiative shape how they step into leadership situations.</option>
+      </select>
+    </div>
+
+    <div class="scenario">
+      <p>2. Social relationships</p>
+      <select id="item2">
+        <option value="">Select an example</option>
+        <option value="qualities">A team member’s confidence, resilience and willingness to take initiative shape how they step into leadership situations.</option>
+        <option value="relationships">A professional becomes recognised as a leader because colleagues regularly seek their advice and value their perspective.</option>
+        <option value="context">In a public sector organisation, leadership behaviour emphasises accountability, transparency, and service to the community.</option>
+      </select>
+    </div>
+
+    <div class="scenario">
+      <p>3. Organisational context</p>
+      <select id="item3">
+        <option value="">Select an example</option>
+        <option value="relationships">A professional becomes recognised as a leader because colleagues regularly seek their advice and value their perspective.</option>
+        <option value="context">In a public sector organisation, leadership behaviour emphasises accountability, transparency, and service to the community.</option>
+        <option value="qualities">A team member’s confidence, resilience and willingness to take initiative shape how they step into leadership situations.</option>
+      </select>
+    </div>
+
+    <div class="buttons">
+      <button onclick="checkAnswers()">Check answers</button>
+      <button class="secondary" onclick="resetActivity()">Reset</button>
+    </div>
+
+    <div id="feedback" class="feedback"></div>
+  </div>
+
+  <script>
+    function checkAnswers() {
+      const answers = {
+        item1: "qualities",
+        item2: "relationships",
+        item3: "context"
+      };
+
+      const correctLabels = {
+        item1: "A team member’s confidence, resilience and willingness to take initiative shape how they step into leadership situations.",
+        item2: "A professional becomes recognised as a leader because colleagues regularly seek their advice and value their perspective.",
+        item3: "In a public sector organisation, leadership behaviour emphasises accountability, transparency, and service to the community."
+      };
+
+      const labels = {
+        item1: "1. Personal qualities",
+        item2: "2. Social relationships",
+        item3: "3. Organisational context"
+      };
+
+      let score = 0;
+      const total = Object.keys(answers).length;
+      let feedbackHTML = "<ul class='result-list'>";
+
+      for (const key in answers) {
+        const userAnswer = document.getElementById(key).value;
+        if (userAnswer === answers[key]) {
+          score++;
+          feedbackHTML += `<li>${labels[key]}: Correct</li>`;
+        } else if (userAnswer === "") {
+          feedbackHTML += `<li>${labels[key]}: No answer selected</li>`;
+        } else {
+          feedbackHTML += `<li>${labels[key]}: Incorrect. Correct answer: ${correctLabels[key]}</li>`;
+        }
+      }
+
+      feedbackHTML += "</ul>";
+
+      const feedbackBox = document.getElementById("feedback");
+      feedbackBox.style.display = "block";
+
+      if (score === total) {
+        feedbackBox.className = "feedback correct";
+        feedbackBox.innerHTML = `<strong>Well done. You got ${score} out of ${total} correct.</strong>${feedbackHTML}`;
+      } else {
+        feedbackBox.className = "feedback incorrect";
+        feedbackBox.innerHTML = `<strong>You got ${score} out of ${total} correct.</strong>${feedbackHTML}`;
+      }
+    }
+
+    function resetActivity() {
+      document.getElementById("item1").value = "";
+      document.getElementById("item2").value = "";
+      document.getElementById("item3").value = "";
+
+      const feedbackBox = document.getElementById("feedback");
+      feedbackBox.style.display = "none";
+      feedbackBox.innerHTML = "";
+      feedbackBox.className = "feedback";
+    }
+  </script>
+</body>
+</html>
